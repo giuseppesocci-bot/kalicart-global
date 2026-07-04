@@ -1,0 +1,41 @@
+name: Behavior report
+description: Unexpected behavior while evaluating or integrating the KaliCart Global MCP server
+labels: ["feedback"]
+body:
+  - type: input
+    id: client
+    attributes:
+      label: Client name and version
+      placeholder: e.g. Claude Desktop 1.x, Glama inspector, custom agent
+    validations:
+      required: true
+  - type: dropdown
+    id: tool
+    attributes:
+      label: Tool
+      options:
+        - global_search
+        - get_product
+        - lookup_merchant
+        - list_merchants
+        - list_categories
+        - initialize / handshake
+        - other
+    validations:
+      required: true
+  - type: input
+    id: timestamp
+    attributes:
+      label: UTC timestamp of the request
+      description: Lets us correlate with server logs
+      placeholder: 2026-07-04T14:32:00Z
+    validations:
+      required: true
+  - type: textarea
+    id: expected_observed
+    attributes:
+      label: Expected vs. observed
+      description: Include the request arguments if possible
+    validations:
+      required: true
+

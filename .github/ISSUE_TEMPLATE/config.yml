@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/giuseppesocci-bot/kalicart-global/security/advisories/new
+    about: Please report security issues privately, not via public issues.
+  - name: Documentation & spec
+    url: https://bridge.kalicart.com/mcp/
+    about: Server documentation and the ARC protocol spec.
