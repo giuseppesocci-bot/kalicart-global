@@ -1,17 +1,32 @@
-# KaliCart Global — Public MCP Server
+# KaliCart Global — Federated Commerce Search for AI Agents
 
-Federated commerce search across independent WooCommerce merchants. Keyless, read-only, no registration required.
+**One query across many independent WooCommerce stores — real products, merchant-authoritative prices, live availability. Keyless, read-only, no registration.**
 
-- **Endpoint:** `https://dashboard.kalicart.com/mcp-public` (Streamable HTTP)
+KaliCart Global is a public [Model Context Protocol](https://modelcontextprotocol.io) server that lets an AI agent search real product offers across independent merchants that opted in through the ARC (Agent-Readable Catalog) protocol. Instead of scraping a storefront and guessing at price and stock, an agent queries a structured, federated index and gets data it can trust — then hands the shopper off to the merchant's own store to complete the purchase. The server itself never transacts.
+
+- **Endpoint:** `https://dashboard.kalicart.com/mcp-public` (remote, Streamable HTTP)
 - **Registry:** [`io.github.giuseppesocci-bot/kalicart-global`](https://registry.modelcontextprotocol.io/v0/servers?search=kalicart) — official MCP registry, status `active`
-- **Spec & docs:** https://bridge.kalicart.com/mcp/
-- **ARC protocol:** https://bridge.kalicart.com/spec/
+- **Docs:** https://bridge.kalicart.com/mcp/ · **ARC protocol:** https://bridge.kalicart.com/spec/
 
-This repository is the public interface for the server: documentation, issue tracking, and security contact. The server itself is a hosted service; its source is not published here.
+## Why it exists
 
-## What it does
+Crawling a product page works when a machine only needs to *read* it. It breaks the moment an agent needs to *act* on a real price and real stock — the price may be stale, the stock may be phantom, the variant may not exist. KaliCart's approach is to make a catalog **computable** rather than merely crawlable: queryable, authoritative and real-time by design.
 
-KaliCart Global exposes a federated index of real product offers from independent WooCommerce merchants that opted in via the ARC (Agent-Readable Catalog) protocol. Prices and availability are merchant-authoritative. Every product carries a direct storefront URL for checkout handoff — the server is read-only and never transacts.
+Reading a catalog this way is also far cheaper. A companion case study on the Bridge layer measured a live 626-product catalog served to an agent in **8,000 tokens instead of 196,595** — a ~24× reduction, small enough to fit a listing inside a model's context window instead of overflowing it ([read it](https://bridge.kalicart.com/blog/woocommerce-agent-token-cost/)). Global brings the same structured, read-cheap surface to many merchants at once.
+
+## Connect
+
+Add it to your MCP client as a remote (Streamable HTTP) server — no API key or account required:
+
+```json
+{
+  "mcpServers": {
+    "kalicart-global": {
+      "url": "https://dashboard.kalicart.com/mcp-public"
+    }
+  }
+}
+```
 
 ## Tools
 
@@ -35,6 +50,8 @@ Typical flow: `list_categories` / `list_merchants` to understand coverage → `g
 - Price filters operate in each offer's merchant currency; no FX conversion is applied.
 - No pagination: use `limit` (max 25 for offers, 50 for merchants).
 
+This repository is the public interface for the server — documentation, issue tracking and security contact. The server is a hosted service; its source is not published here.
+
 ## Feedback
 
 If you are evaluating or integrating this server and hit unexpected behavior, [open an issue](../../issues/new/choose). Including the UTC timestamp of your requests lets us correlate with server logs.
@@ -43,8 +60,8 @@ For security matters, see [SECURITY.md](SECURITY.md) — please do not report vu
 
 ## Related
 
-- [KaliCart Bridge](https://bridge.kalicart.com) — the WooCommerce plugin that makes a merchant catalog agent-readable (ARC)
-- [kalicart-mcp](https://github.com/giuseppesocci-bot/kalicart-mcp) — per-site MCP plugin for WordPress
+- **[KaliCart Bridge](https://bridge.kalicart.com)** — the free WooCommerce plugin that makes a single merchant's catalog agent-readable (ARC). Bridge is the *door* on each store; Global is the *federated index* across many such doors.
+- **[kalicart-mcp](https://github.com/giuseppesocci-bot/kalicart-mcp)** — per-site MCP plugin for WordPress content.
 
 ---
 Maintained by [Save The Brain](https://bridge.kalicart.com) · Giuseppe Socci
