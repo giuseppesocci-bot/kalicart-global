@@ -7,6 +7,7 @@ KaliCart Global is a public [Model Context Protocol](https://modelcontextprotoco
 - **Endpoint:** `https://dashboard.kalicart.com/mcp-public` (remote, Streamable HTTP)
 - **Registry:** [`io.github.giuseppesocci-bot/kalicart-global`](https://registry.modelcontextprotocol.io/v0/servers?search=kalicart) — official MCP registry, status `active`
 - **Docs:** https://bridge.kalicart.com/mcp/ · **ARC protocol:** https://bridge.kalicart.com/spec/
+- **Legal:** https://global.kalicart.com/terms/ (Terms of Use, including optional federated provider-delivery channels) · https://global.kalicart.com/privacy/ (Privacy Notice)
 
 ## Why it exists
 
@@ -36,7 +37,7 @@ All five tools are public, keyless, read-only, and idempotent.
 |---|---|
 | `global_search` | Search the federated index by free text (`q`) and/or canonical category (`leaf`), with facet filters (brand, gender, color, price range, stock). Returns offers with merchant-authoritative prices, UCP `availability_status`, storefront URLs and canonical category leaves. |
 | `get_product` | Full product detail by `p2209_id` (obtained from `global_search`): price, availability, attributes, variants, direct storefront URL. |
-| `lookup_merchant` | Check whether a merchant domain runs an ARC-compliant catalog (KaliCart Bridge). Returns bridge version, discovery URL and federated-indexing consent flags. A miss schedules a background probe. |
+| `lookup_merchant` | Check whether a merchant domain runs an ARC-compliant catalog (KaliCart Bridge). Returns bridge version, discovery URL and federated-indexing consent flags. A miss schedules a background probe. Federated-indexing consent is separate from a merchant's optional authorization of a named external provider (see Legal above); this tool does not report per-provider authorization state. |
 | `list_merchants` | List participating merchants with domain, storefront URL and product count. |
 | `list_categories` | List canonical category leaves with product counts; supports `parent` filtering. |
 
