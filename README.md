@@ -37,7 +37,7 @@ All five tools are public, keyless, read-only, and idempotent.
 |---|---|
 | `global_search` | Search the federated index by free text (`q`) and/or canonical category (`leaf`), with facet filters (brand, gender, color, price range, stock). Returns offers with merchant-authoritative prices, UCP `availability_status`, storefront URLs and canonical category leaves. |
 | `get_product` | Full product detail by `p2209_id` (obtained from `global_search`): price, availability, attributes, variants, direct storefront URL. |
-| `lookup_merchant` | Check whether a merchant domain runs an ARC-compliant catalog (KaliCart Bridge). Returns bridge version, discovery URL and federated-indexing consent flags. A miss schedules a background probe. Federated-indexing consent is separate from a merchant's optional authorization of a named external provider (see Legal above); this tool does not report per-provider authorization state. |
+| `lookup_merchant` | Check whether a merchant domain runs an ARC-compliant catalog (KaliCart Bridge). Returns bridge version, discovery URL and federated-indexing consent flags; a miss returns `probe: "not_scheduled"` rather than queuing a background check. Federated-indexing consent is separate from a merchant's optional authorization of a named external provider (see Legal above); this tool does not report per-provider authorization state. |
 | `list_merchants` | List participating merchants with domain, storefront URL and product count. |
 | `list_categories` | List canonical category leaves with product counts; supports `parent` filtering. |
 
