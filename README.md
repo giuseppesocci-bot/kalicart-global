@@ -70,6 +70,7 @@ What to expect:
 - `search_catalog` returns an indexed snapshot (`metadata.kalicart.snapshot_at`). `get_product` and `lookup_catalog` read price and availability **live from the merchant's KaliCart Bridge** when it answers in time (`metadata.kalicart.source = "live"`), and say so when they fall back to the snapshot.
 - Prices are in ISO 4217 minor units. Identifiers are stable: `gid://kalicart/Product/…` and `gid://kalicart/ProductVariant/…`.
 - Categories use the KaliCart canonical taxonomy (`taxonomy: "kalicart"`, e.g. `home.bedroom.pillows`); pass them back in `filters.categories`.
+- **Perimeter:** the same catalog as the public Global API — every opted-in merchant, including wine and spirits, adult-only wellness and digital goods, with the store's own age and legal checks at checkout. Surfaces built for one specific platform apply that platform's narrower product policy; the UCP endpoint does not.
 - Only merchants that installed KaliCart Bridge and opted in are indexed. KaliCart never sells, checks out or takes payment: the purchase happens on the merchant's store, and its checkout is the final authority.
 
 ## Feedback
