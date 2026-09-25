@@ -54,6 +54,8 @@ Typical flow: `list_categories` / `list_merchants` to understand coverage → `g
 
 This repository is the public interface for the server — documentation, issue tracking and security contact. The server is a hosted service; its source is not published here.
 
+The [MIT license](LICENSE) covers the contents of this repository only; the hosted service and catalog data are governed by the [Terms of Use](https://global.kalicart.com/terms/).
+
 ## Feedback
 
 If you are evaluating or integrating this server and hit unexpected behavior, [open an issue](../../issues/new/choose). Including the UTC timestamp of your requests lets us correlate with server logs.
