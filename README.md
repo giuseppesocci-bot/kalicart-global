@@ -56,6 +56,22 @@ This repository is the public interface for the server — documentation, issue 
 
 The [MIT license](LICENSE) covers the contents of this repository only; the hosted service and catalog data are governed by the [Terms of Use](https://global.kalicart.com/terms/).
 
+## UCP Catalog
+
+KaliCart Global also speaks the [Universal Commerce Protocol](https://ucp.dev) Catalog capability (spec `2026-08-25`), so any UCP shopping agent can query independent WooCommerce stores the same way it queries other UCP catalogs.
+
+- **Profile:** `https://global.kalicart.com/.well-known/ucp` (catalog search + lookup, no checkout)
+- **Endpoint:** `https://global.kalicart.com/ucp/mcp` (Streamable HTTP)
+- **Tools:** `search_catalog`, `lookup_catalog`, `get_product`. Every request must carry `meta["ucp-agent"].profile`.
+
+What to expect:
+
+- Every variant carries its **seller** (the merchant), with a link to the store and, when declared, its refund policy.
+- `search_catalog` returns an indexed snapshot (`metadata.kalicart.snapshot_at`). `get_product` and `lookup_catalog` read price and availability **live from the merchant's KaliCart Bridge** when it answers in time (`metadata.kalicart.source = "live"`), and say so when they fall back to the snapshot.
+- Prices are in ISO 4217 minor units. Identifiers are stable: `gid://kalicart/Product/…` and `gid://kalicart/ProductVariant/…`.
+- Categories use the KaliCart canonical taxonomy (`taxonomy: "kalicart"`, e.g. `home.bedroom.pillows`); pass them back in `filters.categories`.
+- Only merchants that installed KaliCart Bridge and opted in are indexed. KaliCart never sells, checks out or takes payment: the purchase happens on the merchant's store, and its checkout is the final authority.
+
 ## Feedback
 
 If you are evaluating or integrating this server and hit unexpected behavior, [open an issue](../../issues/new/choose). Including the UTC timestamp of your requests lets us correlate with server logs.
