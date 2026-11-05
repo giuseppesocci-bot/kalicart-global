@@ -15,6 +15,8 @@ Crawling a product page works when a machine only needs to *read* it. It breaks 
 
 Reading a catalog this way is also far cheaper. A companion case study on the Bridge layer measured a live 626-product catalog served to an agent in **8,000 tokens instead of 196,595** — a ~24× reduction, small enough to fit a listing inside a model's context window instead of overflowing it ([read it](https://bridge.kalicart.com/blog/woocommerce-agent-token-cost/)). Global brings the same structured, read-cheap surface to many merchants at once.
 
+The same holds once the agent moves from reading to quoting. In a pre-registered benchmark on real stores, the same agent reached a store-confirmed delivered total through the merchant's Bridge with **69% fewer tokens** than through the public WooCommerce Store API on complex tasks (variants, quantity limits, shipping thresholds, two stores), and with 47% fewer on variant tasks where both paths were right 20 times out of 20 ([write-up](https://bridge.kalicart.com/blog/same-total-fewer-tokens-agent-benchmark/), [harness and data](https://github.com/giuseppesocci-bot/kalicart-agent-bench)). Global finds the store; the Bridge is where the agent gets the total the store will charge.
+
 ## Connect
 
 Add it to your MCP client as a remote (Streamable HTTP) server — no API key or account required:
